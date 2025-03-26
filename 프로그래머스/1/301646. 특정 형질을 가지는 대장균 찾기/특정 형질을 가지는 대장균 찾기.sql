@@ -1,0 +1,4 @@
+SELECT COUNT(ID) AS COUNT
+FROM ECOLI_DATA
+WHERE GENOTYPE & 2 = 0 # 2번 형질 보유 X
+    AND GENOTYPE & 5 > 0 # 1번 혹은 3번 형질 보유 O
