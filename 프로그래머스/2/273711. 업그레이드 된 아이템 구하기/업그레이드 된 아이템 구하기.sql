@@ -1,0 +1,9 @@
+# ii의 ITEM_ID와 같은 값을 PARENT_ITEM_ID로 가지는 아이템을 모음
+# 그 PARENT_ITEM_ID를 부모의 ID로 갖는 아이템들의 ITEM_ID를 확인
+# 그 ITEM_ID를 갖는 아이템들의 정보 출력
+SELECT ii2.ITEM_ID, ii2.ITEM_NAME, ii2.RARITY
+FROM ITEM_INFO ii
+JOIN ITEM_TREE it ON it.PARENT_ITEM_ID = ii.ITEM_ID
+JOIN ITEM_INFO ii2 ON it.ITEM_ID = ii2.ITEM_ID
+WHERE ii.RARITY = 'RARE'
+ORDER BY ii2.ITEM_ID DESC;
