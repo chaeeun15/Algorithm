@@ -1,14 +1,14 @@
 from collections import deque
 def solution(n, computers):
     answer = 0
-    # 배열의 오른쪽 윗부분만 보면 됨. 어차피 대칭이기 때문
     visit = [0] * n
     def bfs(start):
         queue = deque()
         queue.append(start)
         visit[start] = 1
         while queue:
-            cur = queue.popleft()         
+            cur = queue.popleft()
+            # 배열이 대칭이라는 보장이 없음
             for i in range(n):
                 next_ = computers[cur][i]
                 # computers의 값이 1이고
