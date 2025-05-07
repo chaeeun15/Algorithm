@@ -1,5 +1,4 @@
 from collections import deque
-from collections import defaultdict
 def solution(n, edge):
     graph = {}
     for v, w in edge:
