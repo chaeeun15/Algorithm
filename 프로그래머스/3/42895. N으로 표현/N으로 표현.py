@@ -16,6 +16,9 @@ def solution(N, number):
     
     for i in range(1, 8):
         for j in range(i):
+            # (j+1)개 + (i-j)개 = (i+1)개
+            # set_list[i]는 N을 i+1개 사용해서 만들 수 있는 수들의 집합임.
+            # j값을 변경하면서 i+1을 만들 수 있는 방법을 사용한 것.
             for op1 in set_list[j]:
                 for op2 in set_list[i-j-1]:
                     # +, -, *, // 순서
