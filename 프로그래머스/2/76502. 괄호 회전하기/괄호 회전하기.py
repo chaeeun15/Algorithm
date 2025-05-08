@@ -20,6 +20,7 @@ def correct(s):
                 stack.pop()
                 continue
         stack.append(i)
+    # for문을 다 돌았는데 stack이 아직 비워지지 않은 경우도 올바르지 않은 경우임
     if stack:
         return 0
     return 1
