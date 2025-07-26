@@ -1,36 +1,53 @@
 import sys
-from itertools import combinations
 input = sys.stdin.readline
-# n은 단어의 개수, k는 배우는 글자의 개수
+
+# n은 단어 개수, k는 가르친 글자의 개수
 n, k = map(int, input().split())
-answer = 0
-word_list = []
-for i in range(n):
-    word_list.append(input().strip())
-# anta, tica, 겹치는 문자 뺀 단어 리스트
-word_sub = ['' for _ in range(n)]
-for i in range(n):
-    for j in word_list[i][4:-4]:
-        if j not in {'a', 'n', 't', 'i', 'c'} and j not in word_sub[i]:
-            word_sub[i] += j
-# 알파벳만 따로 모음
-chars = set(''.join(word_sub))
-# anta, tica를 만들지 못하면 아무 단어도 읽을 수 없음
+words = []
+for _ in range(n):
+    words.append(set(input().strip()))
+
+# a, n, t, i, c은 무조건 읽어야 하므로
+# k가 5 미만이면 읽을 수 있는 단어 없음
 if k < 5:
     print(0)
-# a,n,t,i,c 만으로 모든 글자를 만들 수 있는 경우
-# if len(chars) == 0:
-#     print(n)
-# k-5개의 글자로 나머지를 다 표현할 수 있는 경우우
-elif len(chars) <= k-5:
+    exit(0)
+# k가 26이면 모든 글자를 다 읽을 수 있음
+elif k == 26:
     print(n)
-# anta, tica에 들어가는 antic 빼고 나머지 글자만 고려
-else:
-    for comb in combinations(chars, k-5):
-        allowed = set(comb)
-        count = 0
-        for word in word_sub:
-            if set(word).issubset(allowed):
-                count += 1
-        answer = max(answer, count)
-    print(answer)
+    exit(0)
+
+# a, n, t, i, c는 visit을 True로 설정
+visit = [False] * 26
+for c in ('a', 'n', 't', 'i', 'c'):
+    visit[ord(c) - ord('a')] = True
+
+def dfs(start, cnt):
+    global ans
+    # antic외에 visit이 True로 바뀐 알파벳이 k-5개가 되면
+    if cnt == k - 5:
+        temp = 0
+        # words리스트를 돌면서 각 단어가 지금 True인 알파벳들로 읽을 수 있는지 확인
+        for word in words:
+            readable = True
+            for c in word:
+                if not visit[ord(c) - ord('a')]:
+                    readable = False
+                    break
+            if readable:
+                temp += 1
+        ans = max(ans, temp)
+        return
+
+    for i in range(start, 26):
+        if not visit[i]:
+            # antic 이외에 다른 알파벳들을 하나씩 True로 바꿔가면서 dfs 실행
+            visit[i] = True
+            dfs(i, cnt + 1)
+            # 예를 들어 k = 8이면 b, d, (e~z)로 dfs를 돌고
+            # b, e, (f~z)로 dfs를 돌고, 모든 경우의 수를 확인해볼 수 있음. 
+            visit[i] = False
+
+ans = 0
+dfs(0, 0)
+print(ans)
