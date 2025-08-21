@@ -5,20 +5,20 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
 
-        int[] road = new int[n - 1];
+        long[] road = new long[n - 1];
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n - 1; i++) {
-            road[i] = Integer.parseInt(st.nextToken());
+            road[i] = Long.parseLong(st.nextToken());
         }
 
-        int[] price = new int[n];
+        long[] price = new long[n];
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
-            price[i] = Integer.parseInt(st.nextToken());
+            price[i] = Long.parseLong(st.nextToken());
         }
 
         long total = 0L;
-        int pre = Integer.MAX_VALUE;
+        long pre = Integer.MAX_VALUE;
         for (int i = 0; i < n - 1; i++) {
             if (pre <= price[i]) {
                 total += pre * road[i];
