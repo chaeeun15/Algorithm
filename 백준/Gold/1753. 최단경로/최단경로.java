@@ -1,8 +1,8 @@
 import java.io.*;
 import java.util.*;
 class Node {
-    int end;
-    int weight;
+    int end; // 도착하는 노드 위치
+    int weight; // end 노드에 도착할 때까지의 wegith의 합
     public Node(int end, int weight) {
         this.end = end;
         this.weight = weight;
@@ -41,11 +41,11 @@ public class Main {
             Node cur = heap.poll();
             if (!visited[cur.end]) {
                 visited[cur.end] = true;
-            }
-            for (Node next : list.get(cur.end)) {
-                if (!visited[next.end] && distance[cur.end] + next.weight < distance[next.end]) {
-                    distance[next.end] = distance[cur.end] + next.weight;
-                    heap.offer(new Node(next.end, distance[next.end]));
+                for (Node next : list.get(cur.end)) {
+                    if (!visited[next.end] && distance[cur.end] + next.weight < distance[next.end]) {
+                        distance[next.end] = distance[cur.end] + next.weight;
+                        heap.offer(new Node(next.end, distance[next.end]));
+                    }
                 }
             }
         }
