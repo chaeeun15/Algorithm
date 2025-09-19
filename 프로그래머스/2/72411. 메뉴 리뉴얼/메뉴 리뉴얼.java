@@ -43,8 +43,6 @@ class Solution {
             sb = new StringBuilder();
             combination(menus, 0, num);
             for (Map.Entry<String, Integer> entry : map.entrySet()) {
-                // System.out.println(entry.getKey() + " " + entry.getValue());
-                // int tempMax = 0;
                 for (int i = 0; i < orders.length; i++) {
                     int temp = 0;
                     for (int j = 0; j < num; j++) {
@@ -59,7 +57,6 @@ class Solution {
                     }
                 }
                 max = Math.max(entry.getValue(), max);
-                //System.out.println(entry.getKey() + " " + entry.getValue());
             }
             
             for (Map.Entry<String, Integer> entry : map.entrySet()) {
@@ -71,7 +68,6 @@ class Solution {
         
         String[] answer = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
-            // System.out.println(list.get(i));
             answer[i] = list.get(i);
         }
         
@@ -80,5 +76,5 @@ class Solution {
     }
 }
 // orders에 나온 알파벳 중 2개를 뽑음 -> 최대 26C2
-// 그 조합으로 orders를 돌면서 몇 번 나왔는지 확인 -> 최댓값 갱신(hashmap?)
+// 그 조합으로 orders를 돌면서 몇 번 나왔는지 확인 -> 최댓값 갱신(hashmap)
 // 3개 4개 등등 course 값에 따라 반복
