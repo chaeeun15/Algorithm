@@ -27,14 +27,13 @@ class Solution {
         }
         
         PriorityQueue<Node> heap = new PriorityQueue<>((n1, n2) -> Integer.compare(n1.weight, n2.weight));
-        heap.offer(new Node(1, 0));
         distance[1] = 0;
+        heap.offer(new Node(1, 0));
         while (!heap.isEmpty()) {
             Node cur = heap.poll();
             if (cur.weight > distance[cur.end]) {
                 continue;
             }
-            
             for (Node next : list.get(cur.end)) {
                 if (distance[next.end] > distance[cur.end] + next.weight) {
                     distance[next.end] = distance[cur.end] + next.weight;
